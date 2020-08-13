@@ -29,15 +29,15 @@ class Todocontroller extends Controller
     public function store(Request $request)
     {
         //store a new todo in database
-        $data= $request->validate([
+        $validate=Validator::make($request->toArray(),[
             "name"=>"required",
             "status"=>"required"
         ]);
         if($validate->fails()){
-            return response($validate->error(),400);
+            return response($validate->errors(),400);
         }
 
-        return response(new TodoResource(Todo::create($data),201));//new todo created
+        return response(new TodoResource(Todo::create($validate->validate())),201);//new todo created
     }
 
     /**
@@ -64,15 +64,17 @@ class Todocontroller extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data= $request->validate([
+
+        $validate=Validator::make($request->toArray(),[
             "name"=>"required",
             "status"=>"required"
         ]);
         if($validate->fails()){
-            return response($validate->error(),400);
+            return response($validate->errors(),400);
         }
        
         $todo = Todo::find($id);
+        
         $todo->name =  $request->get('name');
         $todo->status =  $request->get('status');
         

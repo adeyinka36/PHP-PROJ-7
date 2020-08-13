@@ -10,7 +10,7 @@
     <?php
       
        $process= curl_init();
-       curl_setopt($process,CURLOPT_URL,"http://127.0.0.1:1500/api/todo/");
+       curl_setopt($process,CURLOPT_URL,"http://127.0.0.1:1000/api/todo/");
        
        curl_setopt($process,CURLOPT_RETURNTRANSFER,1);
        $result= curl_exec($process);

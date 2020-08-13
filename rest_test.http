@@ -1,6 +1,11 @@
 
+post  http://127.0.0.1:1500/api/todo
+Content-Type:application/json
 
-GET http://127.0.0.1:1000/api/todo/
+{
+    "name":"washing",
+    
+}
 
 
 
